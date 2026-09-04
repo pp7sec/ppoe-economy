@@ -33,15 +33,10 @@ SELF_ID = os.environ.get("DISCORD_SELF_ID", "")
 PINNED = [("Divine Orb", "chaos"), ("Exalted Orb", "divine")]
 
 def _load_emoji():
-    defaults = {"chaos": "<:chaos2:200000000000000001>", "divine": "<:divine2:200000000000000002>", "exalted": "<:exalted2:200000000000000003>"}
-    for p in [pathlib.Path(__file__).with_name("emoji_config.json"), pathlib.Path("/root/.hermes/scripts/emoji_config.json")]:
-        try:
-            data = json.loads(p.read_text())
-            cfg = data.get("poe2", data)
-            return {k: cfg.get(k, v) for k, v in defaults.items()}
-        except Exception:
-            continue
-    return defaults
+    """Read the PoE2 emoji map from emoji_config.json (next to this script)."""
+    p = pathlib.Path(__file__).with_name("emoji_config.json")
+    data = json.loads(p.read_text(encoding="utf-8"))
+    return data.get("poe2", data)
 
 SYM = _load_emoji()
 CHAOS_EMOJI = SYM["chaos"]

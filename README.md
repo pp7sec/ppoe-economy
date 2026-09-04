@@ -42,7 +42,7 @@
 - `poe1` ใช้ `chaos1/divine1/exalted1` — โพสต์ลงห้อง PoE1
 - `poe2` ใช้ `chaos2/divine2/exalted2` — โพสต์ลงห้อง PoE2
 
-สคริปต์จะอ่านไฟล์นี้ตอนรัน ถ้าไม่มีไฟล์จะ fallback เป็นค่า default เดิม (ไม่พัง)
+สคริปต์จะอ่าน emoji จาก `emoji_config.json` **เท่านั้น** (ไฟล์ที่อยู่ข้างๆ สคริปต์) — ถ้าไม่มีไฟล์นี้ หรือ JSON ผิดรูปแบบ สคริปต์จะ error ทันที (ไม่มีค่า default สำรองในโค้ด) ดังนั้นต้องมีไฟล์นี้และใส่ emoji ให้ครบเสมอ
 
 วิธีหา ID emoji: ใน Discord พิมพ์ `\:chaos1:` แล้วส่ง จะได้ `<:chaos1:เลข>` หรือคลิกขวา emoji → Copy ID (ต้องเปิด Developer Mode)
 

@@ -32,16 +32,10 @@ MARKER = "\u200b\u200b"
 
 # --- emoji config (ย้ายเซิร์ฟแค่แก้ emoji_config.json ตัวเดียว) ---
 def _load_emoji():
-    defaults = {"chaos": "<:chaos1:100000000000000001>", "divine": "<:divine1:100000000000000002>", "exalted": "<:exalted1:100000000000000003>"}
-    for p in [pathlib.Path(__file__).with_name("emoji_config.json"), pathlib.Path("/root/.hermes/scripts/emoji_config.json")]:
-        try:
-            data = json.loads(p.read_text())
-            cfg = data.get("poe1", data)
-            # merge defaults with file values
-            return {k: cfg.get(k, v) for k, v in defaults.items()}
-        except Exception:
-            continue
-    return defaults
+    """Read the PoE1 emoji map from emoji_config.json (next to this script)."""
+    p = pathlib.Path(__file__).with_name("emoji_config.json")
+    data = json.loads(p.read_text(encoding="utf-8"))
+    return data.get("poe1", data)
 
 EMOJI = _load_emoji()
 

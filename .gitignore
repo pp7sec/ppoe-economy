@@ -1,0 +1,7 @@
+# กัน token หลุดขึ้น GitHub — ห้าม commit พวกนี้
+.env
+.discord_token
+*.log
+__pycache__/
+.venv/
+venv/

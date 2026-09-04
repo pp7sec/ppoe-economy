@@ -1,0 +1,34 @@
+name: poe-economy
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # ทุกชั่วโมงตรง (UTC) — อยากถี่กว่านี้ใช้ '*/30 * * * *'
+  workflow_dispatch:     # กดรันมือจากแท็บ Actions ได้
+
+# ห้ามให้ workflow เขียน repo ได้ (กัน exfiltrate ใน public repo)
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+
+      - name: Post PoE1
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_SELF_ID: ${{ secrets.DISCORD_SELF_ID }}
+          TARGET_CHANNEL: '111111111111111111'
+        run: python economy_poe1.py
+
+      - name: Post PoE2
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_SELF_ID: ${{ secrets.DISCORD_SELF_ID }}
+          TARGET_CHANNEL: '222222222222222222'
+        run: python economy_poe2.py

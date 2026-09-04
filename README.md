@@ -129,6 +129,8 @@ Workflow `.github/workflows/economy.yml` จะรันเองทุกชั
 
 แก้เวลา: `cron: '0 * * * *'` = ทุกชั่วโมงตรง, `*/30 * * * *` = ทุก 30 นาที, `0 0 * * *` = 07:00 ไทย
 
+> ⚠️ **cron แก้ได้ในไฟล์ `economy.yml` เท่านั้น — ใส่ Variables ไม่ได้** GitHub Actions อ่านส่วน `on.schedule` ก่อนโหลด context ของ vars/secrets ค่าตรงนั้นจึงต้องเป็นข้อความตายตัว ถ้าใส่ `${{ vars.CRON }}` schedule จะไม่ทำงาน (ต่างจาก Channel ID ที่ย้ายไป Variables ได้)
+
 กดรันมือ: `Actions` → `poe-economy` → `Run workflow`
 
 ---

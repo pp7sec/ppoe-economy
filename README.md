@@ -122,8 +122,12 @@ Workflow `.github/workflows/economy.yml` จะรันเองทุกชั
 
 ## วิธีหา Channel ID / Bot ID
 
-- **Channel ID:** Discord Settings → Advanced → Developer Mode → คลิกขวาห้อง → Copy Channel ID
-- **Bot ID:** `curl -H "Authorization: Bot <TOKEN>" https://discord.com/api/v10/users/@me` ดูฟิลด์ `id`
+ก่อนอื่นเปิด **Developer Mode**: Discord `Settings` → `Advanced` → เปิด `Developer Mode` (จะมีเมนู Copy ID โผล่ตอนคลิกขวา)
+
+- **Channel ID:** คลิกขวาที่ห้อง → `Copy Channel ID`
+- **Bot ID (`DISCORD_SELF_ID`):** คลิกขวาที่ชื่อบอท (ในรายชื่อสมาชิก หรือที่โพสต์ของบอท) → `Copy User ID`
+
+> ทางเลือก (ไม่ต้องเปิด Developer Mode): `curl -H "Authorization: Bot <TOKEN>" https://discord.com/api/v10/users/@me` แล้วดูฟิลด์ `id`
 
 ## สิทธิ์ที่บอทต้องมีในห้อง
 

@@ -110,7 +110,26 @@ python economy_poe2.py
 
 > Public repo ก็ใช้ Secrets ได้ (เข้ารหัสด้วย libsodium, log เบลอเป็น `***`) แต่ Private ปลอดภัยกว่า — log ใครก็ดูได้ใน public
 
-### 3. Push ไฟล์ทั้งหมดขึ้น repo
+> **ทำไมไม่มี `TARGET_CHANNEL` ในตาราง?** เพราะ Channel ID ไม่ใช่ความลับ จึงกำหนดไว้ในไฟล์ workflow โดยตรง (ดูขั้นตอนถัดไป) — ไม่ต้องใส่เป็น Secret
+
+### 3. แก้ Channel ID ในไฟล์ workflow
+
+เปิด `.github/workflows/economy.yml` แล้วแก้ค่า `TARGET_CHANNEL` ให้เป็น ID ห้องจริงของคุณ (ค่าในไฟล์ตอนนี้เป็นเลขตัวอย่าง `111111.../222222...`):
+
+```yaml
+      - name: Post PoE1
+        env:
+          ...
+          TARGET_CHANNEL: '111111111111111111'   # 👈 ใส่ Channel ID ห้อง PoE1
+      - name: Post PoE2
+        env:
+          ...
+          TARGET_CHANNEL: '222222222222222222'   # 👈 ใส่ Channel ID ห้อง PoE2
+```
+
+วิธีหา Channel ID → คลิกขวาที่ห้อง → `Copy Channel ID` (ดูหัวข้อ [วิธีหา Channel ID / Bot ID](#วิธีหา-channel-id--bot-id))
+
+### 4. Push ไฟล์ทั้งหมดขึ้น repo
 
 Workflow `.github/workflows/economy.yml` จะรันเองทุกชั่วโมง (UTC)
 

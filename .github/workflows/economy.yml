@@ -23,12 +23,12 @@ jobs:
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_SELF_ID: ${{ secrets.DISCORD_SELF_ID }}
-          TARGET_CHANNEL: '111111111111111111'
+          TARGET_CHANNEL: ${{ vars.TARGET_CHANNEL_POE1 }}
         run: python economy_poe1.py
 
       - name: Post PoE2
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_SELF_ID: ${{ secrets.DISCORD_SELF_ID }}
-          TARGET_CHANNEL: '222222222222222222'
+          TARGET_CHANNEL: ${{ vars.TARGET_CHANNEL_POE2 }}
         run: python economy_poe2.py

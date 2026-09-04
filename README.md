@@ -99,37 +99,31 @@ python economy_poe2.py
 
 ### 1. สร้าง repo (ติ๊ก Private ปลอดภัยสุด)
 
-### 2. ใส่ Secrets
+### 2. ใส่ Secrets และ Variables
 
-`Settings` → `Secrets and variables` → `Actions` → `New repository secret`:
+ไปที่ `Settings` → `Secrets and variables` → `Actions` — หน้านี้มี **2 แท็บ**:
+
+**แท็บ `Secrets`** (ค่าเข้ารหัส, log โชว์เป็น `***`) → กด `New repository secret`:
 
 | Name | Value |
 |------|-------|
 | `DISCORD_BOT_TOKEN` | token บอท `MTM3OD...` (ห้าม hardcode ในไฟล์!) |
 | `DISCORD_SELF_ID` | ID ของบอทเอง `333333333333333333` — กันลบโพสต์ผิดบอท (ดูหัวข้อ [ตัวแปรที่ใช้](#ตัวแปรที่ใช้-environment-variables)) |
 
+**แท็บ `Variables`** (ค่าธรรมดา ไม่ลับ) → กด `New repository variable`:
+
+| Name | Value |
+|------|-------|
+| `TARGET_CHANNEL_POE1` | Channel ID ห้อง PoE1 |
+| `TARGET_CHANNEL_POE2` | Channel ID ห้อง PoE2 |
+
+> **ทำไม Channel ID อยู่แท็บ Variables ไม่ใช่ Secrets?** เพราะ Channel ID ไม่ใช่ความลับ ใส่เป็น Variable ก็พอ (แก้ได้ในหน้า Settings ที่เดียว ไม่ต้องแตะโค้ด) — workflow จะอ่านค่านี้ผ่าน `${{ vars.TARGET_CHANNEL_POE1 }}` ให้อัตโนมัติ
+>
+> วิธีหา Channel ID → คลิกขวาที่ห้อง → `Copy Channel ID` (ดูหัวข้อ [วิธีหา Channel ID / Bot ID](#วิธีหา-channel-id--bot-id))
+
 > Public repo ก็ใช้ Secrets ได้ (เข้ารหัสด้วย libsodium, log เบลอเป็น `***`) แต่ Private ปลอดภัยกว่า — log ใครก็ดูได้ใน public
 
-> **ทำไมไม่มี `TARGET_CHANNEL` ในตาราง?** เพราะ Channel ID ไม่ใช่ความลับ จึงกำหนดไว้ในไฟล์ workflow โดยตรง (ดูขั้นตอนถัดไป) — ไม่ต้องใส่เป็น Secret
-
-### 3. แก้ Channel ID ในไฟล์ workflow
-
-เปิด `.github/workflows/economy.yml` แล้วแก้ค่า `TARGET_CHANNEL` ให้เป็น ID ห้องจริงของคุณ (ค่าในไฟล์ตอนนี้เป็นเลขตัวอย่าง `111111.../222222...`):
-
-```yaml
-      - name: Post PoE1
-        env:
-          ...
-          TARGET_CHANNEL: '111111111111111111'   # 👈 ใส่ Channel ID ห้อง PoE1
-      - name: Post PoE2
-        env:
-          ...
-          TARGET_CHANNEL: '222222222222222222'   # 👈 ใส่ Channel ID ห้อง PoE2
-```
-
-วิธีหา Channel ID → คลิกขวาที่ห้อง → `Copy Channel ID` (ดูหัวข้อ [วิธีหา Channel ID / Bot ID](#วิธีหา-channel-id--bot-id))
-
-### 4. Push ไฟล์ทั้งหมดขึ้น repo
+### 3. Push ไฟล์ทั้งหมดขึ้น repo
 
 Workflow `.github/workflows/economy.yml` จะรันเองทุกชั่วโมง (UTC)
 

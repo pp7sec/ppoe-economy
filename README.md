@@ -7,6 +7,42 @@
 
 ---
 
+## 🚀 Setup สำหรับ copy ไปใช้จริง
+
+repo นี้เป็น **template** — เลขทั้งหมดในไฟล์เป็นค่า **ตัวอย่าง (placeholder)** ต้องแทนด้วยของจริงก่อนใช้
+
+### 1. สร้างสำเนาเป็นของตัวเอง (แนะนำ Private)
+
+กดปุ่มเขียว **`Use this template`** → `Create a new repository` → **เลือก `Private`** → ได้ repo ใหม่ history สะอาด แยกขาดจากต้นฉบับ
+
+> หรือ clone แล้ว push ขึ้น repo ใหม่เองก็ได้ (ดูหัวข้อ [วิธีใช้บน GitHub Actions](#วิธีใช้บน-github-actions-แนะนำ-private-repo))
+
+### 2. เตรียมของจริง 4 อย่าง
+
+| # | สิ่งที่ต้องมี | ได้มาจากไหน |
+|---|---|---|
+| 1 | **Bot token** | สร้างบอทที่ [Discord Developer Portal](https://discord.com/developers/applications) → Bot → Reset Token |
+| 2 | **Bot ID** | คลิกขวาที่บอท → `Copy User ID` (เปิด Developer Mode ก่อน) |
+| 3 | **Channel ID** (2 ห้อง) | คลิกขวาที่ห้อง → `Copy Channel ID` |
+| 4 | **Emoji ID** (6 ตัว) | อัพ emoji เข้าเซิร์ฟ → คลิกขวา emoji → `Copy ID` |
+
+### 3. เชิญบอทเข้าเซิร์ฟ + ให้สิทธิ์
+
+เชิญบอทของตัวเองเข้าเซิร์ฟ แล้วให้สิทธิ์ในห้อง: `View Channel`, `Send Messages`, `Manage Messages` (ไว้ลบโพสต์เก่า)
+
+### 4. ใส่ค่าจริง 2 ที่
+
+- **`emoji_config.json`** → แทนเลข emoji `100000.../200000...` ด้วย Emoji ID จริง
+- **GitHub Secrets/Variables** → ใส่ token / bot ID / channel ID (ดูหัวข้อ [ใส่ Secrets และ Variables](#2-ใส่-secrets-และ-variables))
+
+### 5. รัน
+
+Push แล้ว workflow รันเองทุกชั่วโมง หรือกดมือที่ `Actions` → `poe-economy` → `Run workflow`
+
+> ⚠️ **ห้ามใช้ token ของคนอื่น** — บอทตัวเดียวโพสต์หลายที่จะตีกัน และ token หลุด = ใครก็คุมบอทได้ ให้สร้างบอทของตัวเองเสมอ
+
+---
+
 ## ไฟล์ในแพ็ค
 
 ```
